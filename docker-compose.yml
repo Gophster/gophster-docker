@@ -1,0 +1,48 @@
+version: '3.3'
+
+services:
+    gophster.reverse-proxy:
+        container_name: 'gophster.reverse-proxy'
+        image: traefik:v1.7
+        command: --api --docker
+        labels:
+            - traefik.frontend.rule=Host:monitor.tesetr.localhost
+            - traefik.port=8080
+        ports:
+            - '80:80'
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+
+    gophster.api:
+        container_name: 'gophster.api'
+        user: node
+        image: node:13.8.0-stretch
+        labels:
+            - traefik.frontend.rule=Host:api.gophster.localhost
+            - traefik.port=3000
+            - traefik.backend=gophster_api'
+        depends_on:
+            - 'gophster.reverse-proxy'
+        expose:
+            - '3000'
+        volumes:
+            - './services/gophster-api:/home/node'
+        working_dir: /home/node
+        command: sh -c 'tail -f /dev/null'
+
+    gophster.frontend:
+        container_name: 'gophster.frontend'
+        user: node
+        image: node:13.8.0-stretch
+        labels:
+            - traefik.frontend.rule=Host:app.gophster.localhost
+            - traefik.port=4200
+            - traefik.backend=gophster_frontend'
+        depends_on:
+            - 'gophster.reverse-proxy'
+        expose:
+            - '4200'
+        volumes:
+            - './services/gophster-frontend:/home/node'
+        working_dir: /home/node
+        command: sh -c 'tail -f /dev/null'
