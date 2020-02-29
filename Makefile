@@ -32,15 +32,15 @@ ps:
 logs:
 	@docker-compose logs -f $(filter-out $@,$(MAKECMDGOALS))
 
-setup:
+clone:
 	@mkdir -p services
 	@cd services && \
 	git clone -b develop $(API_REPO) && \
 	git clone -b develop $(ANGULAR_REPO)
 
-refresh:
-	@rm -rf services
-	@make setup
+install:
+	./scripts/install.sh
+
 
 # https://stackoverflow.com/a/6273809/1826109
 %:

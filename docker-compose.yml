@@ -25,8 +25,8 @@ services:
         expose:
             - '3000'
         volumes:
-            - './services/gophster-api:/home/node'
-        working_dir: /home/node
+            - './services/gophster-api:/home/node/app'
+        working_dir: /home/node/app
         command: sh -c 'tail -f /dev/null'
 
     gophster.frontend:
@@ -41,6 +41,6 @@ services:
         expose:
             - '4200'
         volumes:
-            - './services/gophster-frontend:/home/node'
-        working_dir: /home/node
+            - './services/gophster-frontend:/home/node/app'
+        working_dir: /home/node/app
         command: sh -c 'tail -f /dev/null'
