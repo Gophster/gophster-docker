@@ -6,7 +6,7 @@ services:
         image: traefik:v1.7
         command: --api --docker
         labels:
-            - traefik.frontend.rule=Host:monitor.tesetr.localhost
+            - traefik.frontend.rule=Host:monitor.gophster.localhost
             - traefik.port=8080
         ports:
             - '80:80'
@@ -20,7 +20,6 @@ services:
         labels:
             - traefik.frontend.rule=Host:api.gophster.localhost
             - traefik.port=3000
-            - traefik.backend=gophster_api'
         depends_on:
             - 'gophster.reverse-proxy'
         expose:
@@ -35,9 +34,8 @@ services:
         user: node
         image: node:13.8.0-stretch
         labels:
-            - traefik.frontend.rule=Host:app.gophster.localhost
+            - traefik.frontend.rule=Host:frontend.gophster.localhost
             - traefik.port=4200
-            - traefik.backend=gophster_frontend'
         depends_on:
             - 'gophster.reverse-proxy'
         expose:

@@ -39,7 +39,7 @@ setup:
 	git clone -b develop $(ANGULAR_REPO)
 
 refresh:
-	@sudo rm -rf services
+	@rm -rf services
 	@make setup
 
 # https://stackoverflow.com/a/6273809/1826109
