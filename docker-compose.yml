@@ -44,3 +44,11 @@ services:
             - './services/gophster-frontend:/home/node/app'
         working_dir: /home/node/app
         command: sh -c 'tail -f /dev/null'
+
+    gophster.maindb:
+        container_name: 'gophster.maindb'
+        image: postgres:12.2-alpine
+        env_file:
+          - .env  
+        volumes:
+          - ./services/gophster-api/database-data:/var/lib/postgresql/data
