@@ -21,7 +21,7 @@ bash-frontend:
 	@docker exec -it --user node gophster.frontend bash
 
 bash-frontend-win:
-	@winpty docker exec -it --user node gophster.api bash
+	@winpty docker exec -it --user node gophster.frontend bash
 
 stop:
 	@echo "Stopping containers for $(PROJECT_NAME)..."
@@ -48,7 +48,7 @@ install:
 	./scripts/install.sh
 
 install-win:
-	pwd
+	./scripts/install-win.sh
 # https://stackoverflow.com/a/6273809/1826109
 %:
 	@:
