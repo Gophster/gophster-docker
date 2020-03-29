@@ -49,6 +49,9 @@ services:
         container_name: 'gophster.maindb'
         image: postgres:12.2-alpine
         env_file:
-          - .env  
+            - .env
         volumes:
-          - ./services/gophster-api/database-data:/var/lib/postgresql/data
+            - maindb:/var/lib/postgresql/data
+
+volumes:
+    maindb:

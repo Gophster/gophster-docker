@@ -25,6 +25,7 @@ make up
 
 echo -e "\n${RED}[5/6] Building API ...\n\v${NONE}"
 winpty docker-compose  exec gophster.api npm install
+winpty docker-compose  exec gophster.api npm run typeorm:run
 
 echo -e "\n${RED}[6/6] Building Frontend...\n\v${NONE}"
 winpty docker-compose  exec gophster.frontend npm install
