@@ -53,5 +53,11 @@ services:
         volumes:
             - maindb:/var/lib/postgresql/data
 
+    gophster.redis:
+        container_name: 'gophster.redis'
+        image: 'redis'
+        expose:
+            - '6379'
+
 volumes:
     maindb:
